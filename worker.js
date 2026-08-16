@@ -236,12 +236,6 @@ export default {
       return new Response("TavernBot is awake. ⚔️", { status: 200 });
     }
 
-    // Reject anything that isn't Telegram talking to us
-    if (
-      request.headers.get("X-Telegram-Bot-Api-Secret-Token") !== env.SECRET_TOKEN
-    ) {
-      return new Response("Nope.", { status: 403 });
-    }
 
     const update = await request.json();
     ctx.waitUntil(handleUpdate(update, env));
